@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="stylesheet.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
@@ -10,14 +11,13 @@
       <h1>Twittler</h1>
     </div>
     <div id="twitter">
+      Viewing
     </div>
 
     <div id="feed">
-        <ul class="twitts">
-          <li><span class="handle"><a href="#" class="profile" data-username="shawndrost">@shawndrost</a></span> <span class="content">test tweet</span> at <span class="time">12:00</span></li>
-          <li><span class="handle"><a href="#" class="profile" data-username="mracus">@mracus</a></span> <span class="content">test tweet</span> at <span class="time">12:00</span></li>
-        </ul>
         <a href="#" class="refresh">Load more Twitts</a>
+        <ul class="twitts">
+        </ul>
     </div>
     <script src="twittler.js"></script>
   </body>

@@ -9,6 +9,7 @@ var sessionData = {
 };
 
 $(document).ready(function(){
+  loadTwitts(sessionData.profile.name);
   $('#feed').on('click', '.refresh',function(event) {
     //event.stopPropagation();
     event.preventDefault();
@@ -32,10 +33,12 @@ $(document).ready(function(){
   });
   $('body').on('click', '#header', function() {
     //reset page
-    $('#twitter').hide();
-    $('#feed').find('.twitts').text('');
-    sessionData.profile.name = false;
-    loadTwitts(sessionData.profile.name);
+    if (sessionData.profile.name) {
+      $('#twitter').hide();
+      $('#feed').find('.twitts').text('');
+      sessionData.profile.name = false;
+      loadTwitts(sessionData.profile.name);
+    }
   });
 });
 
@@ -56,9 +59,7 @@ function loadTwitts(user, username) {
 function formatTwitt(twitt) {
   var formattedTwitt = '<li>';
   formattedTwitt += '<span class=\"handle\"><a href=\"#\" class=\"profile\" data-username=\"' + twitt.user + '\">@' + twitt.user + '</a></span>';
-  formattedTwitt += ': ';
-  formattedTwitt += '<span class=\"content\">' + twitt.message + '</span>';
-  formattedTwitt += ' at ';
+  formattedTwitt += ' : <span class=\"content\">' + twitt.message + '</span>';
   formattedTwitt += '<span class=\"time\">' + twitt.created_at + '</span>';
   formattedTwitt += '</li>';
   return formattedTwitt;
