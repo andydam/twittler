@@ -30,6 +30,13 @@ $(document).ready(function(){
       loadTwitts(true, sessionData.profile.name);
     //}
   });
+  $('body').on('click', '#header', function() {
+    //reset page
+    $('#twitter').hide();
+    $('#feed').find('.twitts').text('');
+    sessionData.profile.name = false;
+    loadTwitts(sessionData.profile.name);
+  });
 });
 
 function loadTwitts(user, username) {
