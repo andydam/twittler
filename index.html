@@ -9,12 +9,15 @@
     <div id="header">
       <h1>Twittler</h1>
     </div>
-    
+    <div id="twitter">
+    </div>
+
     <div id="feed">
-        <a href="#" id="refresh">Load more Twitts</a>
         <ul class="twitts">
-          <li><span class="handle">@shawndrost</span> <span class="content">test tweet</span> at <span class="time">12:00</span></li>
+          <li><span class="handle"><a href="#" class="profile" data-username="shawndrost">@shawndrost</a></span> <span class="content">test tweet</span> at <span class="time">12:00</span></li>
+          <li><span class="handle"><a href="#" class="profile" data-username="mracus">@mracus</a></span> <span class="content">test tweet</span> at <span class="time">12:00</span></li>
         </ul>
+        <a href="#" class="refresh">Load more Twitts</a>
     </div>
     <script src="twittler.js"></script>
   </body>

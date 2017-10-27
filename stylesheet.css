@@ -2,6 +2,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 60%;
+    text-align: center;
 }
 
 #header {
@@ -13,16 +14,34 @@ body {
     text-align: center;
 }
 
+#twitter {
+    display:none;
+}
+
 #feed {
-    
+
 }
 
 .twitts {
 
 }
 
+.twitts li {
+    list-style-position: inside;
+    list-style-type: none;
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;   
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 .twitts .handle {
     font-weight: bold;
+}
+
+.twitts .handle a {
+    text-decoration: none;
 }
 
 .twitts .content {
