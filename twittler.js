@@ -41,7 +41,18 @@ $(document).ready(function(){
       loadTwitts(sessionData.profile.name);
     }
   });
+  scheduleRefresh();
 });
+
+var scheduleRefresh = function(){
+  if (!sessionData.profile.name) {
+    $('#twitter').hide();
+    loadTwitts(sessionData.profile.name);
+  } else {
+    loadTwitts(true, sessionData.profile.name);
+  }
+  setTimeout(scheduleRefresh, 1000);
+};
 
 function loadTwitts(user, username) {
   if (!user) {
@@ -69,5 +80,5 @@ function formatTwitt(twitt) {
 function displayTwitt(twittStr) {
   var $body = $('#feed').find('.twitts');
   var $twitt = $(twittStr);
-  $twitt.prependTo($body);
+  $twitt.prependTo($body).hide().fadeIn(200);
 }
