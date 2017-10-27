@@ -3,21 +3,35 @@ body {
     margin-right: auto;
     width: 60%;
     text-align: center;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;  
+    background-color:#c0deed;
 }
 
 #header {
-    margin: 50px auto 50px auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #eeeeee;
+}
+
+#header a {
+    text-decoration: none;
 }
 
 #header h1 {
     text-align: center;
     font-size: 50px;
+    color: #00aced;
 }
 
 #twitter {
-    display:none;
-    padding-bottom: 10px;
+    display: none;
+    padding-top: 20px;
+    color:black;
+    text-decoration: none;
+    padding-bottom: 20px;
+    font-size: 14px;
+    background-color: #FCFCFC;
+    font-weight: bold;
 }
 
 #feed {
@@ -26,11 +40,16 @@ body {
 
 #feed .refresh {
     display: block;
-    padding-top: 20px;
-    font-weight: bold;
+    margin-top: 10px;
+    padding-top: 10px;
     color:black;
     text-decoration: none;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    background-color: #dddddd;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .twitts {
@@ -40,10 +59,10 @@ body {
 .twitts li {
     list-style-position: inside;
     list-style-type: none;
-    border: 1px solid black;
     padding: 10px;
     text-align: left;   
     margin-top: 10px;
+    background-color: #FCFCFC;
 }
 
 .twitts li.nth-child(odd) {

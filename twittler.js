@@ -26,7 +26,7 @@ $(document).ready(function(){
       sessionData.profile.lastIndex = 0;
       sessionData.profile.name = $(this).data('username');
       $('#feed').find('.twitts').text('');
-      $('#twitter').text(sessionData.profile.name + '\'s twitts');
+      $('#twitter').text('Showing ' + sessionData.profile.name + '\'s twitts');
       $('#twitter').show();
       loadTwitts(true, sessionData.profile.name);
     //}
@@ -37,6 +37,7 @@ $(document).ready(function(){
       $('#twitter').hide();
       $('#feed').find('.twitts').text('');
       sessionData.profile.name = false;
+      sessionData.stream.lastIndex = 0;
       loadTwitts(sessionData.profile.name);
     }
   });
@@ -60,7 +61,7 @@ function formatTwitt(twitt) {
   var formattedTwitt = '<li>';
   formattedTwitt += '<span class=\"handle\"><a href=\"#\" class=\"profile\" data-username=\"' + twitt.user + '\">@' + twitt.user + '</a></span>';
   formattedTwitt += ' : <span class=\"content\">' + twitt.message + '</span>';
-  formattedTwitt += '<span class=\"time\">' + twitt.created_at + '</span>';
+  formattedTwitt += '<span class=\"time\">' + twitt.created_at.toLocaleString() + '</span>';
   formattedTwitt += '</li>';
   return formattedTwitt;
 }
