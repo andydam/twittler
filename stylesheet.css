@@ -31,24 +31,19 @@ body {
 
 #post {
     background-color: #FDFDFD;
-    height: 184px;
+    height: 155px;
     display: none;
 }
 
-#post label {
-    display: block;
-    padding: 5px 0 5px 0;
-}
-
 #post input {
-    margin: 1px 0 1px 0;
+    margin: 14px 0 14px 0;
     font-size:16px;
     width: 50%;
 }
 
 #post textarea {
     width: 50%;
-    margin: 1px 0 20px 0;
+    margin: 1px 0 18px 0;
     resize: none;
     font-size: 16px;
 }

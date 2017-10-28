@@ -41,19 +41,23 @@ $(document).ready(function(){
 
   //post twitt
   $('#post').on('click', '.submit',function(event) {
-    writeTweet($('input').val(), $('textarea').val());
+    if ($('input').val().length > 0 && $('textarea').val().length > 0) {
+      writeTweet($('input').val(), $('textarea').val());
 
-    //after sending twitt clear out and hide form
-    $('input').val('');
-    $('textarea').val('');
-    $('#post').slideUp();
+      //after sending twitt clear out and hide form
+      $('input').val('');
+      $('textarea').val('');
+      $('#post').slideUp();
 
-    //go back to home and refresh feed
-    $('#userprofile').hide();
-    $('#feed').find('.twitts').text('');
-    sessionData.profile.name = false;
-    sessionData.stream.lastIndex = 0;
-    loadTwitts(sessionData.profile.name);
+      //go back to home and refresh feed
+      $('#userprofile').hide();
+      $('#feed').find('.twitts').text('');
+      sessionData.profile.name = false;
+      sessionData.stream.lastIndex = 0;
+      loadTwitts(sessionData.profile.name);
+    } else {
+      alert('missing username and/or twitt');
+    }
   });
 
   //display twittler profile when handle name clicked
