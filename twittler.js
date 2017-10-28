@@ -20,6 +20,7 @@ $(document).ready(function(){
     loadTwitts(sessionData.profile.name);
   });
 
+  //toggle autoloading when autoload button pressed
   $('#feed').on('click', '.autoload', function(event) {
     event.preventDefault();
     if (sessionData.autoload) {
@@ -30,6 +31,29 @@ $(document).ready(function(){
       $('#feed').find('.autoload').text('Autoload ON');
       scheduleRefresh();
     }
+  });
+
+  //toggle display of post form
+  $('#feed').on('click', '.showpost',function(event) {
+    event.preventDefault();
+    $('#post').slideToggle();
+  });
+
+  //post twitt
+  $('#post').on('click', '.submit',function(event) {
+    writeTweet($('input').val(), $('textarea').val());
+
+    //after sending twitt clear out and hide form
+    $('input').val('');
+    $('textarea').val('');
+    $('#post').slideUp();
+
+    //go back to home and refresh feed
+    $('#userprofile').hide();
+    $('#feed').find('.twitts').text('');
+    sessionData.profile.name = false;
+    sessionData.stream.lastIndex = 0;
+    loadTwitts(sessionData.profile.name);
   });
 
   //display twittler profile when handle name clicked
@@ -52,6 +76,7 @@ $(document).ready(function(){
       loadTwitts(sessionData.profile.name);
     }
   });
+  
 
   //continuously load feed updates
   //scheduleRefresh();
@@ -65,7 +90,9 @@ var scheduleRefresh = function(){
   } else {
     loadTwitts(true, sessionData.profile.name);
   }
-  if (sessionData.autoload) setTimeout(scheduleRefresh, 2500);
+  if (sessionData.autoload) {
+    setTimeout(scheduleRefresh, 1000);
+  }
 };
 
 //used to load new twitts
