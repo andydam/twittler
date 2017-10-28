@@ -1,3 +1,4 @@
+//used for temp memory when switching from feed to user profile
 var sessionData = {
   'profile' : {
     'name' : false,
@@ -5,69 +6,88 @@ var sessionData = {
   },
   'stream' : {
     'lastIndex' : 0
-  }
+  },
+  'autoload' : false
 };
 
 $(document).ready(function(){
+  //inital feed load
   loadTwitts(sessionData.profile.name);
+
+  //load new twitts when load more button pressed
   $('#feed').on('click', '.refresh',function(event) {
-    //event.stopPropagation();
     event.preventDefault();
-    if (!sessionData.profile.name) {
-      $('#twitter').hide();
-      loadTwitts(sessionData.profile.name);
+    loadTwitts(sessionData.profile.name);
+  });
+
+  $('#feed').on('click', '.autoload', function(event) {
+    event.preventDefault();
+    if (sessionData.autoload) {
+      sessionData.autoload = false;
+      $('#feed').find('.autoload').text('Autoload OFF');
     } else {
-      loadTwitts(true, sessionData.profile.name);
+      sessionData.autoload = true;
+      $('#feed').find('.autoload').text('Autoload ON');
+      scheduleRefresh();
     }
   });
+
+  //display twittler profile when handle name clicked
   $('#feed').on('click', '.profile', function(event) {
-    //if (!sessionData.profile) {
-      //sessionData.stream.lastIndex = 0;
-      sessionData.profile.lastIndex = 0;
-      sessionData.profile.name = $(this).data('username');
-      $('#feed').find('.twitts').text('');
-      $('#twitter').text('Showing ' + sessionData.profile.name + '\'s twitts');
-      $('#twitter').show();
-      loadTwitts(true, sessionData.profile.name);
-    //}
+    sessionData.profile.lastIndex = 0;
+    sessionData.profile.name = $(this).data('username');
+    $('#feed').find('.twitts').text('');
+    $('#userprofile').text('Showing ' + sessionData.profile.name + '\'s twitts');
+    $('#userprofile').show();
+    loadTwitts(sessionData.profile.name);
   });
+
+  //reset twittler back to feed when header is clicked
   $('body').on('click', '#header', function() {
-    //reset page
     if (sessionData.profile.name) {
-      $('#twitter').hide();
+      $('#userprofile').hide();
       $('#feed').find('.twitts').text('');
       sessionData.profile.name = false;
       sessionData.stream.lastIndex = 0;
       loadTwitts(sessionData.profile.name);
     }
   });
-  scheduleRefresh();
+
+  //continuously load feed updates
+  //scheduleRefresh();
 });
 
+//used for continuous feed updates
 var scheduleRefresh = function(){
   if (!sessionData.profile.name) {
-    $('#twitter').hide();
+    $('#userprofile').hide();
     loadTwitts(sessionData.profile.name);
   } else {
     loadTwitts(true, sessionData.profile.name);
   }
-  setTimeout(scheduleRefresh, 1000);
+  if (sessionData.autoload) setTimeout(scheduleRefresh, 2500);
 };
 
-function loadTwitts(user, username) {
+//used to load new twitts
+function loadTwitts(user) {
+  //determine if user is loading twitts from feed or profile
   if (!user) {
+    //if no user handle is passed, assume load from feed
     for (var i = sessionData.stream.lastIndex; i < streams.home.length; i++) {
       displayTwitt(formatTwitt(streams.home[i]));
     }
     sessionData.stream.lastIndex = streams.home.length;
   } else {
-    for (var i = sessionData.profile.lastIndex; i < streams.users[username].length; i++) {
-      displayTwitt(formatTwitt(streams.users[username][i]));
+    //if user handle passed, assume load from profile
+    for (var i = sessionData.profile.lastIndex; i < streams.users[user].length; i++) {
+      displayTwitt(formatTwitt(streams.users[user][i]));
     }
-    sessionData.profile.lastIndex = streams.users[username].length;
+    sessionData.profile.lastIndex = streams.users[user].length;
   }
 }
 
+//formats twitt into html string ready for insertion to feed
+//when provided with a twitt object
 function formatTwitt(twitt) {
   var formattedTwitt = '<li>';
   formattedTwitt += '<span class=\"handle\"><a href=\"#\" class=\"profile\" data-username=\"' + twitt.user + '\">@' + twitt.user + '</a></span>';
@@ -77,8 +97,11 @@ function formatTwitt(twitt) {
   return formattedTwitt;
 }
 
+//pushes a formatted twitt string to feed
 function displayTwitt(twittStr) {
   var $body = $('#feed').find('.twitts');
   var $twitt = $(twittStr);
+
+  //prepend twitt as hidden with delayed fade in for visual effect
   $twitt.prependTo($body).hide().fadeIn(200);
 }

@@ -5,19 +5,23 @@
     <link rel="stylesheet" href="stylesheet.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <title>Twittler</title>
   </head>
   <body>
     <div id="header">
-      <a href="#"><h1>Twittler</h1></a>
+      <!-- this div houses the header of the page -->
+      <h1>Twittler</h1>
     </div>
-    <div id="twitter">
-      Viewing
+    <div id="userprofile">
+      <!-- this div houses the profile name when viewing profile -->
+      Viewing user
     </div>
-
     <div id="feed">
-        <a href="#" class="refresh">Load more Twitts</a>
-        <ul class="twitts">
-        </ul>
+      <!-- this div houses the list for twitt feed -->
+      <div id="buttons">
+        <span class="refresh">Load more Twitts</span><span class="autoload">Autoload OFF</span>
+      </div>
+      <ul class="twitts"></ul>
     </div>
     <script src="twittler.js"></script>
   </body>
